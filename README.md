@@ -22,10 +22,8 @@ In the original app, every setting is buried in nested submenus of the tray icon
 - **Advanced section.** Logging (open the log file, verbosity, dump dynamic state), the settings file (save to disk, edit, reset), and maintenance actions (reset dynamic state, compact thunk heap) are now in the window too.
 - **macOS-inspired design.**
   - Large rounded window corners.
-  - Window controls in the top right (minimize, maximize, close).
-  - Pill-shaped buttons and iOS-style switches.
-  - An acrylic selection highlight.
-  - The open-source [Figtree](https://github.com/erikdkennedy/figtree) typeface as an open source option to SF Pro Display font.
+  - macOS styled window controls in the top right.
+  - The open-source [Figtree](https://github.com/erikdkennedy/figtree) typeface.
 - **Fluid motion.** Spring animations when switching sections, picking an effect or flipping a switch.
 - **Simpler tray menu.** Right-clicking the tray icon now only shows *Settings*, *Open at boot* and *Exit*.
 
