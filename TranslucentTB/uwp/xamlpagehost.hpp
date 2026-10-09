@@ -1,6 +1,7 @@
 #pragma once
 #include "basexamlpagehost.hpp"
 #include <concepts>
+#include <optional>
 #include <ShObjIdl_core.h>
 #include <tuple>
 #include <type_traits>
@@ -21,6 +22,10 @@
 #include "util/string_macros.hpp"
 #include "../ProgramLog/error/win32.hpp"
 
+// Pages shaped like a macOS 26 window get large rounded corners instead of the DWM frame.
+template<typename T>
+inline constexpr float window_corner_radius = std::is_same_v<T, winrt::TranslucentTB::Xaml::Pages::SettingsPage> ? 26.0f : 0.0f;
+
 template<typename T>
 class XamlPageHost final : public BaseXamlPageHost {
 private:
@@ -33,6 +38,7 @@ private:
 
 	bool m_PendingSizeUpdate = false;
 	bool m_EndDragLayoutUpdate = false;
+	std::optional<wf::Size> m_RestoredPageSize;
 	callback_t m_Callback;
 	void *m_CallbackData;
 
@@ -44,6 +50,13 @@ private:
 			if (m_content)
 			{
 				m_content.IsActive(wParam != WA_INACTIVE);
+			}
+			break;
+
+		case WM_SIZE:
+			if constexpr (window_corner_radius<T> > 0.0f)
+			{
+				OnSystemSize(wParam, lParam);
 			}
 			break;
 
@@ -134,6 +147,40 @@ private:
 		return BaseXamlPageHost::MessageHandler(uMsg, wParam, lParam);
 	}
 
+	// the window normally follows the size of the page, but while maximized the page follows the window
+	inline void OnSystemSize(WPARAM type, LPARAM size)
+	{
+		if (!m_content || type == SIZE_MINIMIZED)
+		{
+			return;
+		}
+
+		const bool maximized = type == SIZE_MAXIMIZED;
+		if (maximized)
+		{
+			if (!m_RestoredPageSize)
+			{
+				m_RestoredPageSize = wf::Size { static_cast<float>(m_content.Width()), static_cast<float>(m_content.Height()) };
+			}
+
+			const auto scale = GetDpiScale(monitor());
+			m_content.Width(LOWORD(size) / scale);
+			m_content.Height(HIWORD(size) / scale);
+		}
+		else if (m_RestoredPageSize)
+		{
+			m_content.Width(m_RestoredPageSize->Width);
+			m_content.Height(m_RestoredPageSize->Height);
+			m_RestoredPageSize.reset();
+		}
+		else
+		{
+			return;
+		}
+
+		m_content.SetMaximized(maximized);
+	}
+
 	inline winrt::fire_and_forget InitialXamlLayoutChanged(xaml_startup_position position)
 	{
 		m_content.LayoutUpdated(m_LayoutUpdatedToken);
@@ -180,7 +227,8 @@ private:
 				const auto newHeight = static_cast<int>(windowSize.Height);
 				const auto newWidth = static_cast<int>(windowSize.Width);
 				const auto wndRect = rect();
-				if (wndRect && (m_EndDragLayoutUpdate || wndRect->bottom - wndRect->top != newHeight || wndRect->right - wndRect->left != newWidth)) [[unlikely]]
+				const bool systemSized = IsZoomed(m_WindowHandle) || IsIconic(m_WindowHandle);
+				if (wndRect && !systemSized && (m_EndDragLayoutUpdate || wndRect->bottom - wndRect->top != newHeight || wndRect->right - wndRect->left != newWidth)) [[unlikely]]
 				{
 					bool move = true;
 					int x = wndRect->left, y = wndRect->top;
@@ -288,7 +336,7 @@ public:
 	inline XamlPageHost(WindowClass &classRef, WindowClass &dragRegionClass, xaml_startup_position position,
 		winrt::Windows::System::DispatcherQueue dispatcher, callback_t callback,
 		void *data, Args&&... args) :
-		BaseXamlPageHost(classRef, dragRegionClass),
+		BaseXamlPageHost(classRef, dragRegionClass, window_corner_radius<T>),
 		m_content(std::forward<Args>(args)...),
 		m_Dispatcher(std::move(dispatcher)),
 		m_Callback(callback),

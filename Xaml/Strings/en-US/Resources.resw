@@ -144,9 +144,6 @@
   <data name="FramelessPage_CloseMenuItem.Text" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="TrayFlyoutPage_About.Text" xml:space="preserve">
-    <value>About TranslucentTB</value>
-  </data>
   <data name="TrayFlyoutPage_AccentColor.Text" xml:space="preserve">
     <value>Accent Color</value>
     <comment>Also used to generate the title of color picker windows</comment>
@@ -154,14 +151,8 @@
   <data name="TrayFlyoutPage_Acrylic.Text" xml:space="preserve">
     <value>Acrylic</value>
   </data>
-  <data name="TrayFlyoutPage_Advanced.Text" xml:space="preserve">
-    <value>Advanced</value>
-  </data>
   <data name="TrayFlyoutPage_Advanced_CompactThunkHeap.Text" xml:space="preserve">
     <value>Compact thunk heap</value>
-  </data>
-  <data name="TrayFlyoutPage_Advanced_DisableHotSettings.Text" xml:space="preserve">
-    <value>Disable saving settings</value>
   </data>
   <data name="TrayFlyoutPage_Advanced_DumpDynamicState.Text" xml:space="preserve">
     <value>Dump dynamic state to log</value>
@@ -216,17 +207,11 @@
     <value>Desktop</value>
     <comment>Also used to generate the title of color picker windows</comment>
   </data>
-  <data name="TrayFlyoutPage_Enabled.Text" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
   <data name="TrayFlyoutPage_Exit.Text" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="TrayFlyoutPage.FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
-  </data>
-  <data name="TrayFlyoutPage_LineButton.Text" xml:space="preserve">
-    <value>Show taskbar border</value>
   </data>
   <data name="TrayFlyoutPage_MaximizedWindow.Text" xml:space="preserve">
     <value>Maximized window</value>
@@ -242,9 +227,6 @@
   <data name="TrayFlyoutPage_OpenAtBoot.Text" xml:space="preserve">
     <value>Open at boot</value>
   </data>
-  <data name="TrayFlyoutPage_PeekButton.Text" xml:space="preserve">
-    <value>Show Desktop Peek Button</value>
-  </data>
   <data name="TrayFlyoutPage_SearchOpened.Text" xml:space="preserve">
     <value>Search opened</value>
     <comment>Also used to generate the title of color picker windows</comment>
@@ -256,9 +238,6 @@
   <data name="TrayFlyoutPage_TaskViewOpened.Text" xml:space="preserve">
     <value>Task View opened</value>
     <comment>Also used to generate the title of color picker windows</comment>
-  </data>
-  <data name="TrayFlyoutPage_TipsAndTricks.Text" xml:space="preserve">
-    <value>Tips and tricks</value>
   </data>
   <data name="TrayFlyoutPage_VisibleWindow.Text" xml:space="preserve">
     <value>Visible window</value>
@@ -300,5 +279,143 @@ Changes are automatically reloaded when you save the file</value>
   </data>
   <data name="WelcomePage_Message_Suffix.Text" xml:space="preserve">
     <value>if you have any problem or want to see a feature added!</value>
+  </data>
+  <data name="TrayFlyoutPage_Settings.Text" xml:space="preserve">
+    <value>Settings…</value>
+  </data>
+  <data name="SettingsPage.FlowDirection" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
+  <data name="SettingsPage.Title" xml:space="preserve">
+    <value>TranslucentTB Settings</value>
+  </data>
+  <data name="SettingsPage_General.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="SettingsPage_Description_Desktop.Text" xml:space="preserve">
+    <value>When no windows are open on screen.</value>
+  </data>
+  <data name="SettingsPage_Description_VisibleWindow.Text" xml:space="preserve">
+    <value>When at least one window is open.</value>
+  </data>
+  <data name="SettingsPage_Description_MaximisedWindow.Text" xml:space="preserve">
+    <value>When a window is maximized.</value>
+  </data>
+  <data name="SettingsPage_Description_StartOpened.Text" xml:space="preserve">
+    <value>While the Start menu is open.</value>
+  </data>
+  <data name="SettingsPage_Description_SearchOpened.Text" xml:space="preserve">
+    <value>While Windows Search is open.</value>
+  </data>
+  <data name="SettingsPage_Description_TaskViewOpened.Text" xml:space="preserve">
+    <value>While Task View is open.</value>
+  </data>
+  <data name="SettingsPage_Description_BatterySaver.Text" xml:space="preserve">
+    <value>While battery saver is on.</value>
+  </data>
+  <data name="SettingsPage_UseCustomAppearance.Text" xml:space="preserve">
+    <value>Use a custom appearance</value>
+  </data>
+  <data name="SettingsPage_UseCustomAppearance_Description.Text" xml:space="preserve">
+    <value>When off, the desktop appearance is used.</value>
+  </data>
+  <data name="SettingsPage_AppearanceHeader.Text" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="SettingsPage_Effect.Text" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="SettingsPage_Color.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="SettingsPage_Color_Description.Text" xml:space="preserve">
+    <value>Not available with the Normal effect.</value>
+  </data>
+  <data name="SettingsPage_ChangeColor.Content" xml:space="preserve">
+    <value>Change color…</value>
+  </data>
+  <data name="SettingsPage_DetailsHeader.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="SettingsPage_PeekButton.Text" xml:space="preserve">
+    <value>Show desktop button</value>
+  </data>
+  <data name="SettingsPage_PeekButton_Description.Text" xml:space="preserve">
+    <value>The strip at the right end of the taskbar.</value>
+  </data>
+  <data name="SettingsPage_LineButton.Text" xml:space="preserve">
+    <value>Top border line</value>
+  </data>
+  <data name="SettingsPage_LineButton_Description.Text" xml:space="preserve">
+    <value>A thin line along the top edge of the taskbar.</value>
+  </data>
+  <data name="SettingsPage_OpenAtBoot.Text" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="SettingsPage_SaveSettings.Text" xml:space="preserve">
+    <value>Save changes to the settings file</value>
+  </data>
+  <data name="SettingsPage_Description_General.Text" xml:space="preserve">
+    <value>Startup, tips and quitting the app.</value>
+  </data>
+  <data name="SettingsPage_Advanced.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="SettingsPage_Description_Advanced.Text" xml:space="preserve">
+    <value>Logging, the settings file and maintenance.</value>
+  </data>
+  <data name="SettingsPage_LogHeader.Text" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="SettingsPage_SettingsFileHeader.Text" xml:space="preserve">
+    <value>Settings file</value>
+  </data>
+  <data name="SettingsPage_MaintenanceHeader.Text" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="SettingsPage_Open.Content" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="SettingsPage_Dump.Content" xml:space="preserve">
+    <value>Dump</value>
+  </data>
+  <data name="SettingsPage_Edit.Content" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="SettingsPage_Reset.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="SettingsPage_Compact.Content" xml:space="preserve">
+    <value>Compact</value>
+  </data>
+  <data name="SettingsPage_ResetDynamicState_Description.Text" xml:space="preserve">
+    <value>Shortcut: Ctrl+Alt+Shift+F1</value>
+  </data>
+  <data name="SettingsPage_ExitRow.Text" xml:space="preserve">
+    <value>Exit TranslucentTB</value>
+  </data>
+  <data name="SettingsPage_ExitRow_Description.Text" xml:space="preserve">
+    <value>The taskbar goes back to its normal look.</value>
+  </data>
+  <data name="SettingsPage_Exit.Content" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="SettingsPage_Minimize.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="SettingsPage_Minimize.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="SettingsPage_Maximize.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="SettingsPage_Maximize.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="SettingsPage_Close.[using:Windows.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SettingsPage_Close.[using:Windows.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve">
+    <value>Close</value>
   </data>
 </root>

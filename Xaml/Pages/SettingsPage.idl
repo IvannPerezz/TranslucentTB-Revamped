@@ -1,0 +1,49 @@
+import "Models/Primitives/LogLevel.idl";
+import "Models/Primitives/LogSinkState.idl";
+import "Models/Primitives/TaskbarAppearance.idl";
+import "Models/Primitives/TaskbarState.idl";
+import "Models/Primitives/TaskbarType.idl";
+import "Pages/FramelessPage.idl";
+import "Pages/TrayFlyoutPage.idl";
+
+namespace TranslucentTB.Xaml.Pages
+{
+	delegate void MinimizeRequestedDelegate();
+	delegate void MaximizeRequestedDelegate();
+
+	runtimeclass SettingsPage : FramelessPage
+	{
+		SettingsPage();
+
+		event TaskbarSettingsChangedDelegate TaskbarSettingsChanged;
+		event ColorRequestedDelegate ColorRequested;
+
+		// the window itself is managed by the host
+		event MinimizeRequestedDelegate MinimizeRequested;
+		event MaximizeRequestedDelegate MaximizeRequested;
+
+		event OpenLogFileRequestedDelegate OpenLogFileRequested;
+		event LogLevelChangedDelegate LogLevelChanged;
+		event DumpDynamicStateRequestedDelegate DumpDynamicStateRequested;
+		event ResetDynamicStateRequestedDelegate ResetDynamicStateRequested;
+		event CompactThunkHeapRequestedDelegate CompactThunkHeapRequested;
+		event EditSettingsRequestedDelegate EditSettingsRequested;
+		event ResetSettingsRequestedDelegate ResetSettingsRequested;
+		event DisableSavingSettingsChangedDelegate DisableSavingSettingsChanged;
+		event StartupStateChangedDelegate StartupStateChanged;
+		event ExitRequestedDelegate ExitRequested;
+
+		void SetTaskbarSettings(TranslucentTB.Xaml.Models.Primitives.TaskbarState state, TranslucentTB.Xaml.Models.Primitives.TaskbarAppearance appearance);
+		void SetTaskbarType(TranslucentTB.Xaml.Models.Primitives.TaskbarType type);
+		void SetBlurSupported(Boolean supported);
+		void SetDisableSavingSettings(Boolean disabled);
+		void SetStartupState(Windows.Foundation.IReference<Windows.ApplicationModel.StartupTaskState> state);
+		void SetLogState(TranslucentTB.Xaml.Models.Primitives.LogLevel level, TranslucentTB.Xaml.Models.Primitives.LogSinkState sinkState);
+
+		// told by the host whenever the window is maximized or restored, however it happened
+		void SetMaximized(Boolean maximized);
+
+		[noexcept]
+		Boolean SystemHasBattery { get; };
+	}
+}

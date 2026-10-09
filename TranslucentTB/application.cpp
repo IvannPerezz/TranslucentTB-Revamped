@@ -99,7 +99,7 @@ Application::Application(HINSTANCE hInst, std::optional<std::filesystem::path> s
 	),
 	m_XamlApp(CreateXamlApp()),
 	m_XamlManager(UWP::CreateXamlManager()),
-	m_AppWindow(*this, !fileExists, storageFolder.has_value(), hInst, m_Loader),
+	m_AppWindow(*this, !fileExists, hInst, m_Loader),
 	m_Xaml(hInst),
 	m_ShuttingDown(false),
 	m_Dispatcher(winrt::Windows::System::DispatcherQueue::GetForCurrentThread())
@@ -113,6 +113,10 @@ Application::Application(HINSTANCE hInst, std::optional<std::filesystem::path> s
 	{
 		m_Startup.AcquireTask();
 	}
+	else
+	{
+		m_Startup.UseRunKey();
+	}
 
 	if (!fileExists)
 	{
@@ -123,11 +127,6 @@ Application::Application(HINSTANCE hInst, std::optional<std::filesystem::path> s
 void Application::OpenDonationPage()
 {
 	UWP::OpenUri(wf::Uri(L"https://liberapay.com/TranslucentTB"));
-}
-
-void Application::OpenTipsPage()
-{
-	UWP::OpenUri(wf::Uri(L"https://TranslucentTB.github.io/tips"));
 }
 
 void Application::OpenDiscordServer()

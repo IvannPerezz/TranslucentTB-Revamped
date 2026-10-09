@@ -1,11 +1,10 @@
 import "Models/Primitives/LogLevel.idl";
-import "Models/Primitives/LogSinkState.idl";
 import "Models/Primitives/TaskbarAppearance.idl";
 import "Models/Primitives/TaskbarState.idl";
-import "Models/Primitives/TaskbarType.idl";
 
 namespace TranslucentTB.Xaml.Pages
 {
+	// Shared with SettingsPage, which now hosts the appearance and advanced options.
 	delegate void TaskbarSettingsChangedDelegate(TranslucentTB.Xaml.Models.Primitives.TaskbarState state, TranslucentTB.Xaml.Models.Primitives.TaskbarAppearance appearance);
 	delegate void ColorRequestedDelegate(TranslucentTB.Xaml.Models.Primitives.TaskbarState state);
 
@@ -19,44 +18,17 @@ namespace TranslucentTB.Xaml.Pages
 	delegate void CompactThunkHeapRequestedDelegate();
 
 	delegate void StartupStateChangedDelegate();
-	delegate void TipsAndTricksRequestedDelegate();
-	delegate void AboutRequestedDelegate();
 	delegate void ExitRequestedDelegate();
+	delegate void SettingsRequestedDelegate();
 
-	runtimeclass TrayFlyoutPage : Windows.UI.Xaml.Controls.Page, Windows.UI.Xaml.Data.INotifyPropertyChanged
+	runtimeclass TrayFlyoutPage : Windows.UI.Xaml.Controls.Page
 	{
-		TrayFlyoutPage(Boolean hasPackageIdentity);
+		TrayFlyoutPage();
 
-		event TaskbarSettingsChangedDelegate TaskbarSettingsChanged;
-		event ColorRequestedDelegate ColorRequested;
-
-		event OpenLogFileRequestedDelegate OpenLogFileRequested;
-		event LogLevelChangedDelegate LogLevelChanged;
-		event DumpDynamicStateRequestedDelegate DumpDynamicStateRequested;
-		event EditSettingsRequestedDelegate EditSettingsRequested;
-		event ResetSettingsRequestedDelegate ResetSettingsRequested;
-		event DisableSavingSettingsChangedDelegate DisableSavingSettingsChanged;
-		event ResetDynamicStateRequestedDelegate ResetDynamicStateRequested;
-		event CompactThunkHeapRequestedDelegate CompactThunkHeapRequested;
-
+		event SettingsRequestedDelegate SettingsRequested;
 		event StartupStateChangedDelegate StartupStateChanged;
-		event TipsAndTricksRequestedDelegate TipsAndTricksRequested;
-		event AboutRequestedDelegate AboutRequested;
 		event ExitRequestedDelegate ExitRequested;
 
-		void SetTaskbarSettings(TranslucentTB.Xaml.Models.Primitives.TaskbarState state, TranslucentTB.Xaml.Models.Primitives.TaskbarAppearance appearance);
-		void SetTaskbarType(TranslucentTB.Xaml.Models.Primitives.TaskbarType type);
-		void SetLogLevel(TranslucentTB.Xaml.Models.Primitives.LogLevel level);
-		void SetDisableSavingSettings(Boolean disabled);
 		void SetStartupState(Windows.Foundation.IReference<Windows.ApplicationModel.StartupTaskState> state);
-
-		TranslucentTB.Xaml.Models.Primitives.LogSinkState SinkState;
-		Boolean IsBlurSupported;
-
-		[noexcept]
-		Boolean HasPackageIdentity { get; };
-
-		[noexcept]
-		Boolean SystemHasBattery { get; };
 	}
 }

@@ -16,14 +16,4 @@ namespace winrt::TranslucentTB::Xaml::implementation
 	{
 		return value ? wux::Visibility::Collapsed : wux::Visibility::Visible;
 	}
-
-	bool FunctionalConverters::IsSameLogSinkState(txmp::LogSinkState a, txmp::LogSinkState b) noexcept
-	{
-		return a == b;
-	}
-
-	bool FunctionalConverters::IsDifferentLogSinkState(txmp::LogSinkState a, txmp::LogSinkState b) noexcept
-	{
-		return a != b;
-	}
 }

@@ -21,6 +21,8 @@ enum class xaml_startup_position {
 
 class BaseXamlPageHost : public MessageWindow {
 private:
+	// Above zero, the window is clipped to a rounded rectangle of this radius (in DIPs) instead of using the DWM frame.
+	const float m_CornerRadius;
 	XamlDragRegion m_DragRegion;
 	Window m_interopWnd;
 	wuxh::DesktopWindowXamlSource m_source;
@@ -29,6 +31,7 @@ private:
 	winrt::Windows::UI::Color m_BackgroundColor = { };
 
 	void UpdateFrame();
+	void UpdateRoundedRegion();
 
 protected:
 	static wf::Rect ScaleRect(wf::Rect rect, float scale);
@@ -41,7 +44,7 @@ protected:
 	void ResizeWindow(int x, int y, int width, int height, bool move, UINT flags = 0);
 	void PositionDragRegion(wf::Rect position, wf::Rect buttonsRegion, UINT flags = 0);
 	bool PaintBackground(HDC dc, const RECT &target, winrt::Windows::UI::Color col);
-	BaseXamlPageHost(WindowClass &classRef, WindowClass &dragRegionClass);
+	BaseXamlPageHost(WindowClass &classRef, WindowClass &dragRegionClass, float cornerRadius = 0.0f);
 
 	void Cleanup()
 	{

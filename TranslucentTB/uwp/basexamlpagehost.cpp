@@ -1,5 +1,7 @@
 #include "basexamlpagehost.hpp"
+#include <cmath>
 #include <ShellScalingApi.h>
+#include <wil/resource.h>
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 
 #include "win32.hpp"
@@ -8,6 +10,17 @@
 
 void BaseXamlPageHost::UpdateFrame()
 {
+	if (m_CornerRadius > 0.0f)
+	{
+		// the window region gives the shape, the system corners and border would only fight it
+		const DWM_WINDOW_CORNER_PREFERENCE corners = DWMWCP_DONOTROUND;
+		DwmSetWindowAttribute(m_WindowHandle, DWMWA_WINDOW_CORNER_PREFERENCE, &corners, sizeof(corners));
+
+		const COLORREF border = DWMWA_COLOR_NONE;
+		DwmSetWindowAttribute(m_WindowHandle, DWMWA_BORDER_COLOR, &border, sizeof(border));
+		return;
+	}
+
 	// Magic that gives us shadows
 	// we use the top side because any other side would cause a single line of white pixels to
 	// suddenly flash when resizing the color picker.
@@ -15,6 +28,34 @@ void BaseXamlPageHost::UpdateFrame()
 	// or -1: turns it full white.
 	const MARGINS margins = { 0, 0, 1, 0 };
 	HresultVerify(DwmExtendFrameIntoClientArea(m_WindowHandle, &margins), spdlog::level::info, L"Failed to extend frame into client area");
+}
+
+void BaseXamlPageHost::UpdateRoundedRegion()
+{
+	if (IsZoomed(m_WindowHandle))
+	{
+		// maximized windows fill the work area with square corners
+		if (!SetWindowRgn(m_WindowHandle, nullptr, true))
+		{
+			LastErrorHandle(spdlog::level::info, L"Failed to clear window region");
+		}
+	}
+	else if (const auto client = client_rect())
+	{
+		// a window region is not anti-aliased; the page draws a hairline edge over it to soften the steps
+		const int diameter = static_cast<int>(std::round(m_CornerRadius * 2.0f * GetDpiScale(monitor())));
+		if (wil::unique_hrgn region { CreateRoundRectRgn(0, 0, client->right + 1, client->bottom + 1, diameter, diameter) })
+		{
+			if (SetWindowRgn(m_WindowHandle, region.get(), true))
+			{
+				region.release(); // the system owns the region now
+			}
+			else
+			{
+				LastErrorHandle(spdlog::level::info, L"Failed to set window region");
+			}
+		}
+	}
 }
 
 wf::Rect BaseXamlPageHost::ScaleRect(wf::Rect rect, float scale)
@@ -133,9 +174,21 @@ LRESULT BaseXamlPageHost::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam
 			return 1;
 		}
 
+	case WM_SIZE:
+		if (m_CornerRadius > 0.0f && wParam != SIZE_MINIMIZED)
+		{
+			UpdateRoundedRegion();
+
+			// the system can resize this window by itself (maximize, restore, snap), so the island has to follow
+			if (!SetWindowPos(m_interopWnd, nullptr, 0, 0, LOWORD(lParam), HIWORD(lParam), SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE))
+			{
+				LastErrorHandle(spdlog::level::info, L"Failed to set interop window size");
+			}
+		}
+		[[fallthrough]];
+
 	case WM_SETTINGCHANGE:
 	case WM_THEMECHANGED:
-	case WM_SIZE:
 		if (const auto coreWin = UWP::GetCoreWindow())
 		{
 			// forward theme changes to the fake core window
@@ -148,6 +201,29 @@ LRESULT BaseXamlPageHost::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam
 
 	case WM_NCCALCSIZE:
 		return 0;
+
+	case WM_NCACTIVATE:
+		if (m_CornerRadius > 0.0f)
+		{
+			// there is no visible caption to repaint, only keep the activation change
+			return DefWindowProc(m_WindowHandle, uMsg, wParam, -1);
+		}
+		break;
+
+	case WM_GETMINMAXINFO:
+		if (m_CornerRadius > 0.0f)
+		{
+			// without this, a captioned window maximizes past the work area by its (invisible) border
+			MONITORINFO info = { sizeof(info) };
+			if (GetMonitorInfo(monitor(), &info))
+			{
+				const auto minMax = reinterpret_cast<MINMAXINFO *>(lParam);
+				minMax->ptMaxPosition = { info.rcWork.left - info.rcMonitor.left, info.rcWork.top - info.rcMonitor.top };
+				minMax->ptMaxSize = { info.rcWork.right - info.rcWork.left, info.rcWork.bottom - info.rcWork.top };
+				return 0;
+			}
+		}
+		break;
 
 	case WM_DWMCOMPOSITIONCHANGED:
 		UpdateFrame();
@@ -221,8 +297,10 @@ bool BaseXamlPageHost::PaintBackground(HDC dc, const RECT &target, winrt::Window
 	}
 }
 
-BaseXamlPageHost::BaseXamlPageHost(WindowClass &classRef, WindowClass &dragRegionClass) :
-	MessageWindow(classRef, { }),
+BaseXamlPageHost::BaseXamlPageHost(WindowClass &classRef, WindowClass &dragRegionClass, float cornerRadius) :
+	// a caption and window boxes (even though they are drawn by the page) give the system minimize, maximize, open and close animations
+	MessageWindow(classRef, { }, cornerRadius > 0.0f ? WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX : 0),
+	m_CornerRadius(cornerRadius),
 	m_DragRegion(dragRegionClass, m_WindowHandle)
 {
 	UpdateFrame();

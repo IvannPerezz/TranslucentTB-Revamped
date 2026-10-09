@@ -9,6 +9,7 @@
 #include "undefgetcurrenttime.h"
 #include <winrt/TranslucentTB.Xaml.Models.Primitives.h>
 #include <winrt/TranslucentTB.Xaml.Pages.h>
+#include <winrt/Windows.System.h>
 #include "redefgetcurrenttime.h"
 
 #include "config/config.hpp"
@@ -29,22 +30,24 @@ private:
 	Util::thread_independent_mutex m_PickerMutex;
 	std::array<BaseXamlPageHost*, 7> m_ColorPickers{};
 
-	page_t::TaskbarSettingsChanged_revoker m_TaskbarSettingsChangedRevoker;
-	page_t::ColorRequested_revoker m_ColorRequestedRevoker;
+	// Settings window. It lives on its own XAML thread, so it is only ever touched through its dispatcher.
+	struct SettingsSnapshot {
+		std::array<txmp::TaskbarAppearance, 7> Appearances = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+		txmp::TaskbarType Type = txmp::TaskbarType::XAML;
+		bool BlurSupported = true;
+		bool DisableSaving = false;
+		std::optional<winrt::Windows::ApplicationModel::StartupTaskState> Startup;
+		txmp::LogLevel LogLevel = txmp::LogLevel::Off;
+		txmp::LogSinkState SinkState = txmp::LogSinkState::Failed;
+	};
 
-	page_t::OpenLogFileRequested_revoker m_OpenLogFileRequestedRevoker;
-	page_t::LogLevelChanged_revoker m_LogLevelChangedRevoker;
-	page_t::DumpDynamicStateRequested_revoker m_DumpDynamicStateRequestedRevoker;
-	page_t::EditSettingsRequested_revoker m_EditSettingsRequestedRevoker;
-	page_t::ResetSettingsRequested_revoker m_ResetSettingsRequestedRevoker;
-	page_t::DisableSavingSettingsChanged_revoker m_DisableSavingSettingsChangedRevoker;
-	page_t::ResetDynamicStateRequested_revoker m_ResetDynamicStateRequestedRevoker;
-	page_t::CompactThunkHeapRequested_revoker m_CompactThunkHeapRequestedRevoker;
+	Util::thread_independent_mutex m_SettingsMutex;
+	BaseXamlPageHost *m_SettingsHost = nullptr;
+	winrt::Windows::System::DispatcherQueue m_SettingsDispatcher = nullptr;
 
 	page_t::StartupStateChanged_revoker m_StartupStateChangedRevoker;
-	page_t::TipsAndTricksRequested_revoker m_TipsAndTricksRequestedRevoker;
-	page_t::AboutRequested_revoker m_AboutRequestedRevoker;
 	page_t::ExitRequested_revoker m_ExitRequestedRevoker;
+	page_t::SettingsRequested_revoker m_SettingsRequestedRevoker;
 
 	std::optional<UINT> m_NewInstanceMessage;
 
@@ -52,6 +55,12 @@ private:
 
 	void RefreshMenu() override;
 	void RegisterMenuHandlers();
+	bool OnPrimaryAction() override;
+
+	void OpenSettings();
+	SettingsSnapshot TakeSettingsSnapshot();
+	static void ApplySettingsSnapshot(const winrt::TranslucentTB::Xaml::Pages::SettingsPage &page, const SettingsSnapshot &snapshot);
+	void RefreshSettingsWindow();
 
 	void TaskbarSettingsChanged(const txmp::TaskbarState &state, const txmp::TaskbarAppearance &appearance);
 	void ColorRequested(const txmp::TaskbarState &state);
@@ -66,15 +75,13 @@ private:
 	static void CompactThunkHeapRequested();
 
 	winrt::fire_and_forget StartupStateChanged();
-	static void TipsAndTricksRequested();
-	void AboutRequested();
 	void Exit();
 
 	TaskbarAppearance &GetConfigForState(const txmp::TaskbarState &state);
 	void UpdateTrayVisibility(bool visible);
 
 public:
-	MainAppWindow(Application &app, bool hideIconOverride, bool hasPackageIdentity, HINSTANCE hInstance, DynamicLoader &loader);
+	MainAppWindow(Application &app, bool hideIconOverride, HINSTANCE hInstance, DynamicLoader &loader);
 	~MainAppWindow();
 
 	void ConfigurationChanged();

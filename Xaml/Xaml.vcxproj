@@ -149,6 +149,10 @@
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Pages\SettingsPage.cpp">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="Pages\WelcomePage.cpp">
       <DependentUpon>Pages\WelcomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -198,6 +202,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\TrayFlyoutPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\WelcomePage.xaml">
@@ -301,6 +308,10 @@
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Pages\SettingsPage.h">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="Pages\WelcomePage.h">
       <DependentUpon>Pages\WelcomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -419,6 +430,10 @@
       <DependentUpon>Pages\TrayFlyoutPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
+    <Midl Include="Pages\SettingsPage.idl">
+      <DependentUpon>Pages\SettingsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
     <Midl Include="Pages\WelcomePage.idl">
       <DependentUpon>Pages\WelcomePage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -430,6 +445,11 @@
     <Midl Include="StyleResources.idl">
       <SubType>Designer</SubType>
     </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Packaged by AppPackage at ms-appx:///Fonts/Figtree.ttf -->
+    <None Include="Fonts\Figtree.ttf" />
+    <None Include="Fonts\OFL.txt" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\he-IL\Resources.resw" />

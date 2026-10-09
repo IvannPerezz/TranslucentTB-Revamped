@@ -51,7 +51,6 @@ public:
 	Application(HINSTANCE hInst, std::optional<std::filesystem::path> storageFolder) : Application(hInst, std::move(storageFolder), false) { }
 
 	static void OpenDonationPage();
-	static void OpenTipsPage();
 	static void OpenDiscordServer();
 
 	constexpr ConfigManager &GetConfigManager() noexcept { return m_Config; }

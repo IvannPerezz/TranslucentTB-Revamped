@@ -351,3 +351,6 @@ MigrationBackup/
 .vscode/
 enc_temp_folder/
 vcpkg_installed/
+# Installer build output
+installer/stage/
+installer/output/

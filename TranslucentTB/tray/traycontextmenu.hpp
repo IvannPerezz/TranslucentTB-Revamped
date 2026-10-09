@@ -29,6 +29,12 @@ protected:
 		}
 	}
 
+	// Return true if the left click was handled, otherwise the context menu is shown.
+	virtual bool OnPrimaryAction()
+	{
+		return false;
+	}
+
 	inline LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam) override
 	{
 		switch (uMsg)
@@ -46,10 +52,16 @@ protected:
 		case TRAY_CALLBACK:
 			switch (LOWORD(lParam))
 			{
-			case WM_CONTEXTMENU:
-			case WM_LBUTTONUP:
 			case NIN_KEYSELECT:
 			case NIN_SELECT:
+				// left click or Enter: primary action, if the derived class has one
+				if (OnPrimaryAction())
+				{
+					break;
+				}
+				[[fallthrough]];
+
+			case WM_CONTEXTMENU:
 				SetForegroundWindow(m_WindowHandle);
 
 				if (const auto rect = GetTrayRect())

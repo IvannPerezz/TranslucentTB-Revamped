@@ -1,91 +1,83 @@
-﻿# TranslucentTB
+<p align="center">
+  <img src="branding/icon-1024.png" alt="TranslucentTB icon" width="128">
+</p>
 
-[![Liberapay patrons](https://img.shields.io/liberapay/patrons/TranslucentTB.svg)](https://liberapay.com/TranslucentTB/)
-[![Join on Discord](https://discordapp.com/api/guilds/304387206552879116/widget.png?style=shield)][Discord]
-[![Build Status](https://dev.azure.com/TranslucentTB/TranslucentTB/_apis/build/status%2FContinuous%20Integration%20Builds?branchName=develop)](https://dev.azure.com/TranslucentTB/TranslucentTB/_build)
-[![CodeFactor](https://www.codefactor.io/repository/github/translucenttb/translucenttb/badge/develop)](https://www.codefactor.io/repository/github/translucenttb/translucenttb/overview/develop)
+<h1 align="center">TranslucentTB — Settings Window Edition</h1>
 
-![Microsoft Store App Awards 2022 - Community Choice Award: Open Platform (runner up)](https://user-images.githubusercontent.com/6440374/180880766-4380b2cf-4d9e-4d07-8986-a9b34cb6244a.png#gh-dark-mode-only)![Microsoft Store App Awards 2022 - Community Choice Award: Open Platform (runner up)](https://user-images.githubusercontent.com/6440374/180880839-355c472c-0b7a-4aae-88e5-0234001cb281.png#gh-light-mode-only)
+<p align="center">
+  A fork of <a href="https://github.com/TranslucentTB/TranslucentTB">TranslucentTB</a> with a better settings panel:
+  everything now lives in a proper window instead of a tray icon context menu.
+</p>
 
-A lightweight (uses a few MB of RAM and almost no CPU) utility that makes the Windows taskbar translucent/transparent on Windows 10 and Windows 11.
+---
 
-## Features
+TranslucentTB is a lightweight utility (a few MB of RAM, almost no CPU) that makes the Windows taskbar translucent or transparent on Windows 10 and Windows 11.
 
-- Advanced **color picker** supporting alpha and live preview to change the taskbar's color.
-- **Taskbar states** (choose one - color can be customized on every state except Normal):
-  - **Normal**: Regular Windows style. (as if TranslucentTB was not running)
-  - **Opaque**: Tinted taskbar, without transparency.
-  - **Clear**: Tinted taskbar.
-  - **Blur**: Will make the taskbar slightly blurred. Windows 10 and Windows 11 build 22000 only.
-  - **Acrylic**: Will give the taskbar an appearance similar to Microsoft's Fluent Design guidelines.
-- **Dynamic** modes (these can be used together and each of them provides a taskbar state and color you can customize):
-  - **Visible window**: Will change the taskbar to a different appearance if a window is currently open on the desktop.
-  - **Maximized window**: Will change the taskbar to a different appearance if a window is currently maximised.
-  - **Start opened**: Will change the taskbar appearance when the start menu is opened.
-  - **Search opened**: Will change the taskbar appearance when the search menu (previously Cortana) is open.
-  - **Task View opened**: Will change the taskbar apperance when the Task View (previously Timeline) is open.
-- On Windows 10, ability to **show or hide the Aero Peek button** depending on the currently active dynamic mode.
-- On Windows 11, ability to **show or hide the taskbar line** depending on the currently active dynamic mode.
-- Compatible with [RoundedTB](https://github.com/torchgm/RoundedTB)!
-- Compatible with [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher)!
+In the original app, every setting is buried in nested submenus of the tray icon's right-click menu, which makes changing anything fiddly. This fork replaces that with a settings window that opens in the middle of the screen, where all states and options are visible at a glance.
 
-## Screenshots
+## What's different in this fork
 
-<img src="https://i.imgur.com/QbG7KQA.png" alt="windows 11 acrylic" width="243"> <img src="https://i.imgur.com/zabZ52s.png" alt="windows 11 clear" width="243">
+- **A real settings window.** Left-click the tray icon to open it. A sidebar lists every taskbar state (Desktop, Visible window, Maximized window, Start opened, Search opened, Task View opened, Battery saver), plus **General** and **Advanced** sections.
+- **Everything at a glance.** Each state has a segmented control for the effect (Normal, Opaque, Clear, Blur, Acrylic), a color swatch with the color picker one click away, and switches for the taskbar line or Aero Peek button.
+- **Advanced section.** Logging (open the log file, verbosity, dump dynamic state), the settings file (save to disk, edit, reset), and maintenance actions (reset dynamic state, compact thunk heap) are now in the window too.
+- **macOS-inspired design.**
+  - Large rounded window corners.
+  - Window controls in the top right (minimize, maximize, close).
+  - Pill-shaped buttons and iOS-style switches.
+  - An acrylic selection highlight.
+  - The open-source [Figtree](https://github.com/erikdkennedy/figtree) typeface.
+- **Fluid motion.** Spring animations when switching sections, picking an effect or flipping a switch. The window itself uses the native Windows animations for opening, closing, minimizing and maximizing. Animations follow the Windows "Animation effects" setting.
+- **Simpler tray menu.** Right-clicking the tray icon now only shows *Settings*, *Open at boot* and *Exit*.
+- **A real installer.** One setup file installs everything the app needs. During setup you choose whether TranslucentTB starts minimized to the system tray when Windows starts. You can change that later from the settings window or the tray menu.
+- **Clear taskbar out of the box.** On the desktop, the taskbar is fully transparent until you pick something else.
+- **New icon** in the same style as the author's other utilities.
 
-![windows 10 acrylic](https://i.imgur.com/M15IPJW.png) ![windows 10 clear](https://i.imgur.com/eLGTtwp.png) ![windows 10 blur](https://i.imgur.com/r4ZJjnL.png)
+All the features of the original app are still there: the advanced color picker, the five taskbar effects, the dynamic modes, and compatibility with [RoundedTB](https://github.com/torchgm/RoundedTB) and [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher).
 
 ## Download
 
-[<img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft" height="104">](https://apps.microsoft.com/store/detail/9PF4KZ2VN4W9)
+1. Download `TranslucentTB-1.0-x64.zip` from the [Releases](../../releases) page and extract it.
+2. Run `TranslucentTB-1.0-Setup.exe`.
+3. Choose whether TranslucentTB should start minimized to the system tray when Windows starts, then finish the setup.
 
-You can download the program for free from the [Microsoft Store](https://www.microsoft.com/store/apps/9PF4KZ2VN4W9) and take advantage of its features like background auto-updates.
+The setup speaks the same 12 languages as the app and follows your Windows display language. It installs TranslucentTB for your user account only, so it does not need administrator rights. It installs to `%LocalAppData%\Programs\TranslucentTB` and also installs the Windows components the app needs when they are missing: WinUI 2.8 and the Visual C++ runtime. TranslucentTB can be removed from *Settings → Apps → Installed apps*.
 
-Alternatively, you can download `TranslucentTB.appinstaller` [via the releases tab](https://github.com/TranslucentTB/TranslucentTB/releases) and open it to install the app.
+Requirements: Windows 11 on a 64-bit (x64) PC.
 
-A portable version of the app is also available [on GitHub releases](https://github.com/TranslucentTB/TranslucentTB/releases) as `TranslucentTB.zip`, but this version only works on Windows 11.
+## Building from source
 
-If you want to get the latest bleeding edge build, you can grab it over at the [Azure Pipelines page](https://dev.azure.com/sylve0n/TranslucentTB/_build?definitionId=4). Note that these builds may not work, or include features that are partially complete. Use at your own risk.
+1. Install **Visual Studio 2022** with the *Desktop development with C++* workload, the *Windows application development* workload (UWP/C++ tools) and the Windows 11 SDK (10.0.26100). The [`.vsconfig`](.vsconfig) file lists everything, and the Visual Studio Installer can import it.
+2. Run `vcpkg integrate install` once, using the vcpkg that ships with Visual Studio.
+3. Enable **Developer Mode** in Windows Settings.
+4. Open `TranslucentTB.slnx`, select `Debug | x64` and set **AppPackage** as the startup project.
+5. Press F5. This builds, registers and launches the packaged app.
 
-## Add to Startup
+To build the release configuration from a Developer PowerShell:
 
-To add TranslucentTB to startup, check the "Open at boot" entry in the TranslucentTB tray icon's context menu. If you are having issues or the entry in the context menu is grayed out, try applying the following registry changes:
-```reg
-Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"EnableFullTrustStartupTasks"=dword:00000002
-"EnableUwpStartupTasks"=dword:00000002
-"SupportFullTrustStartupTasks"=dword:00000001
-"SupportUwpStartupTasks"=dword:00000001
+```powershell
+msbuild TranslucentTB.slnx -t:Build -p:Configuration=Release -p:Platform=x64 -p:BuildType=Release -p:AppxBundle=Never -p:UapAppxPackageBuildMode=SideloadOnly
 ```
 
-Portable versions can be added to startup by creating a shortcut to the executable in `%AppData%\Microsoft\Windows\Start Menu\Programs\Startup`.
+The output is placed in `AppPackage\bin\x64\Release`.
 
-## Donations and contributions
+To build the installer, install [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup`) and run:
 
-[We have a Liberapay!](https://liberapay.com/TranslucentTB/) Don't hesitate to donate if you appreciate TranslucentTB and would like to support our work.
+```powershell
+powershell -ExecutionPolicy Bypass -File installer\build.ps1
+```
 
-If you want to contribute to the source code, we have [a how-to contribute guide](CONTRIBUTING.md).
+This builds the release configuration and gathers the app, the Visual C++ runtime and the WinUI framework. It then compiles [`installer/TranslucentTB.iss`](installer/TranslucentTB.iss) and places the setup and the release zip in `installer\output`.
 
-## Security
+The app icon and the package logos are generated by [`TranslucentTB/resources/GenerateIcon.ps1`](TranslucentTB/resources/GenerateIcon.ps1). A high-resolution copy of the icon is in [`branding/`](branding).
 
-Some antiviruses are over eager, so they might flag this program as malicious. IT IS NOT! Over 10M users have downloaded this program safely. The source is open, you can [compile it yourself](CONTRIBUTING.md#building-from-source), and we welcome any and all security reviews.
+## Credits
 
-## Thanks
+This is an unofficial fork. All the credit for TranslucentTB itself goes to its authors and contributors: [@ethanhs](https://github.com/ethanhs), [@sylveon](https://github.com/sylveon), [@MrAksel](https://github.com/MrAksel), [@denosawr](https://github.com/denosawr) and [everyone else who contributed](https://github.com/TranslucentTB/TranslucentTB/graphs/contributors). If you like the app, consider supporting the original project on [Liberapay](https://liberapay.com/TranslucentTB/).
 
-TranslucentTB is a team effort! It is the result of the collective efforts of many people:
+Please report bugs in the new settings window here, not to the upstream project.
 
-- [@ethanhs](https://github.com/ethanhs),
-- [@sylveon](https://github.com/sylveon),
-- [@MrAksel](https://github.com/MrAksel),
-- [@denosawr](https://github.com/denosawr),
-- and last but not least, all of [our contributors](https://github.com/TranslucentTB/TranslucentTB/graphs/contributors)!
+## License
 
-Thanks to [@dAKirby309](https://github.com/dAKirby309) for making the icon! You can find more of his stuff on [his DeviantArt profile](https://dakirby309.deviantart.com/).
+Like the original, this program is free software under the **GNU GPLv3**; see [LICENSE.md](LICENSE.md).
 
-### License
-
-This program is free (as in speech) software under the GPLv3. Please see [the license file](LICENSE.md) for more.
-
-[Discord]: https://discord.gg/TranslucentTB
+The Figtree font is distributed under the SIL Open Font License 1.1; see [`Xaml/Fonts/OFL.txt`](Xaml/Fonts/OFL.txt).

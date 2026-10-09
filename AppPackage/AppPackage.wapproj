@@ -55,8 +55,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets-$(BuildType)\SmallTile.png" Link="Assets\SmallTile.png" />
-    <Content Include="Assets-$(BuildType)\SmallTile.scale-400.png" Link="Assets\SmallTile.scale-400.png" />
+    <Content Include="..\Xaml\Fonts\Figtree.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>Fonts\Figtree.ttf</Link>
+    </Content>
+    <Content Include="Assets-$(BuildType)\SmallTile.png" Link="Assets\SmallTile.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\SmallTile.scale-400.png" Link="Assets\SmallTile.scale-400.png" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="Assets-$(BuildType)\SplashScreen.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>Assets\SplashScreen.jpeg</Link>
@@ -65,18 +69,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Link>Assets\SplashScreen.scale-400.jpeg</Link>
     </Content>
-    <Content Include="Assets-$(BuildType)\Square150x150Logo.png" Link="Assets\Square150x150Logo.png" />
-    <Content Include="Assets-$(BuildType)\Square150x150Logo.scale-400.png" Link="Assets\Square150x150Logo.scale-400.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.altform-lightunplated.png" Link="Assets\Square44x44Logo.altform-lightunplated.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.altform-unplated.png" Link="Assets\Square44x44Logo.altform-unplated.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.png" Link="Assets\Square44x44Logo.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256_altform-unplated.png" Link="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256.png" Link="Assets\Square44x44Logo.targetsize-256.png" />
-    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256_altform-lightunplated.png" Link="Assets\Square44x44Logo.targetsize-256_altform-lightunplated.png" />
-    <Content Include="Assets-$(BuildType)\StoreLogo.png" Link="Assets\StoreLogo.png" />
-    <Content Include="Assets-$(BuildType)\StoreLogo.scale-400.png" Link="Assets\StoreLogo.scale-400.png" />
-    <Content Include="Assets-$(BuildType)\Wide310x150Logo.jpeg" Link="Assets\Wide310x150Logo.jpeg" />
-    <Content Include="Assets-$(BuildType)\Wide310x150Logo.scale-400.jpeg" Link="Assets\Wide310x150Logo.scale-400.jpeg" />
+    <Content Include="Assets-$(BuildType)\Square150x150Logo.png" Link="Assets\Square150x150Logo.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square150x150Logo.scale-400.png" Link="Assets\Square150x150Logo.scale-400.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.altform-lightunplated.png" Link="Assets\Square44x44Logo.altform-lightunplated.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.altform-unplated.png" Link="Assets\Square44x44Logo.altform-unplated.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.png" Link="Assets\Square44x44Logo.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256_altform-unplated.png" Link="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256.png" Link="Assets\Square44x44Logo.targetsize-256.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Square44x44Logo.targetsize-256_altform-lightunplated.png" Link="Assets\Square44x44Logo.targetsize-256_altform-lightunplated.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\StoreLogo.png" Link="Assets\StoreLogo.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\StoreLogo.scale-400.png" Link="Assets\StoreLogo.scale-400.png" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Wide310x150Logo.jpeg" Link="Assets\Wide310x150Logo.jpeg" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Assets-$(BuildType)\Wide310x150Logo.scale-400.jpeg" Link="Assets\Wide310x150Logo.scale-400.jpeg" CopyToOutputDirectory="PreserveNewest" />
     <PRIResource Include="Strings\de-DE\Resources.resw" />
     <PRIResource Include="Strings\es-US\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />

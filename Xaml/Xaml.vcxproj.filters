@@ -73,6 +73,7 @@
     <ClInclude Include="Controls\colorpickerrendering.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\SettingsPage.xaml" />
     <Page Include="Pages\WelcomePage.xaml" />
     <Page Include="Pages\FramelessPage.xaml" />
     <Page Include="Controls\ChromeButton.xaml" />

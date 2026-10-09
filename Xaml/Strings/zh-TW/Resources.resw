@@ -144,23 +144,14 @@
   <data name="FramelessPage_CloseMenuItem.Text" xml:space="preserve">
     <value>關閉</value>
   </data>
-  <data name="TrayFlyoutPage_About.Text" xml:space="preserve">
-    <value>關於 TranslucentTB</value>
-  </data>
   <data name="TrayFlyoutPage_AccentColor.Text" xml:space="preserve">
     <value>輔色</value>
   </data>
   <data name="TrayFlyoutPage_Acrylic.Text" xml:space="preserve">
     <value>壓克力</value>
   </data>
-  <data name="TrayFlyoutPage_Advanced.Text" xml:space="preserve">
-    <value>進階</value>
-  </data>
   <data name="TrayFlyoutPage_Advanced_CompactThunkHeap.Text" xml:space="preserve">
     <value>Thunk 堆積壓縮</value>
-  </data>
-  <data name="TrayFlyoutPage_Advanced_DisableHotSettings.Text" xml:space="preserve">
-    <value>停用儲存設定</value>
   </data>
   <data name="TrayFlyoutPage_Advanced_DumpDynamicState.Text" xml:space="preserve">
     <value>將動態狀態傾印至紀錄檔</value>
@@ -213,17 +204,11 @@
   <data name="TrayFlyoutPage_Desktop.Text" xml:space="preserve">
     <value>返回桌面時</value>
   </data>
-  <data name="TrayFlyoutPage_Enabled.Text" xml:space="preserve">
-    <value>啟用</value>
-  </data>
   <data name="TrayFlyoutPage_Exit.Text" xml:space="preserve">
     <value>離開</value>
   </data>
   <data name="TrayFlyoutPage.FlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
-  </data>
-  <data name="TrayFlyoutPage_LineButton.Text" xml:space="preserve">
-    <value>顯示工作列線</value>
   </data>
   <data name="TrayFlyoutPage_MaximizedWindow.Text" xml:space="preserve">
     <value>視窗最大化時</value>
@@ -237,9 +222,6 @@
   <data name="TrayFlyoutPage_OpenAtBoot.Text" xml:space="preserve">
     <value>開機時啟動</value>
   </data>
-  <data name="TrayFlyoutPage_PeekButton.Text" xml:space="preserve">
-    <value>顯示桌面預覽按鈕</value>
-  </data>
   <data name="TrayFlyoutPage_SearchOpened.Text" xml:space="preserve">
     <value>開啟搜尋選單時</value>
   </data>
@@ -248,9 +230,6 @@
   </data>
   <data name="TrayFlyoutPage_TaskViewOpened.Text" xml:space="preserve">
     <value>開啟工作檢視時</value>
-  </data>
-  <data name="TrayFlyoutPage_TipsAndTricks.Text" xml:space="preserve">
-    <value>訣竅和技巧</value>
   </data>
   <data name="TrayFlyoutPage_VisibleWindow.Text" xml:space="preserve">
     <value>開啟任何視窗時</value>
