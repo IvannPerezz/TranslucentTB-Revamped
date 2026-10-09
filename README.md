@@ -2,7 +2,7 @@
   <img src="branding/icon-1024.png" alt="TranslucentTB icon" width="128">
 </p>
 
-<h1 align="center">TranslucentTB — Settings Window Edition</h1>
+<h1 align="center">TranslucentTB — Revamped</h1>
 
 <p align="center">
   A fork of <a href="https://github.com/TranslucentTB/TranslucentTB">TranslucentTB</a> with a better settings panel:
@@ -25,24 +25,22 @@ In the original app, every setting is buried in nested submenus of the tray icon
   - Window controls in the top right (minimize, maximize, close).
   - Pill-shaped buttons and iOS-style switches.
   - An acrylic selection highlight.
-  - The open-source [Figtree](https://github.com/erikdkennedy/figtree) typeface.
-- **Fluid motion.** Spring animations when switching sections, picking an effect or flipping a switch. The window itself uses the native Windows animations for opening, closing, minimizing and maximizing. Animations follow the Windows "Animation effects" setting.
+  - The open-source [Figtree](https://github.com/erikdkennedy/figtree) typeface as an open source option to SF Pro Display font.
+- **Fluid motion.** Spring animations when switching sections, picking an effect or flipping a switch.
 - **Simpler tray menu.** Right-clicking the tray icon now only shows *Settings*, *Open at boot* and *Exit*.
-- **A real installer.** One setup file installs everything the app needs. During setup you choose whether TranslucentTB starts minimized to the system tray when Windows starts. You can change that later from the settings window or the tray menu.
-- **Clear taskbar out of the box.** On the desktop, the taskbar is fully transparent until you pick something else.
-- **New icon** in the same style as the author's other utilities.
 
 All the features of the original app are still there: the advanced color picker, the five taskbar effects, the dynamic modes, and compatibility with [RoundedTB](https://github.com/torchgm/RoundedTB) and [ExplorerPatcher](https://github.com/valinet/ExplorerPatcher).
 
 ## Download
 
-1. Download `TranslucentTB-1.0-x64.zip` from the [Releases](../../releases) page and extract it.
-2. Run `TranslucentTB-1.0-Setup.exe`.
-3. Choose whether TranslucentTB should start minimized to the system tray when Windows starts, then finish the setup.
+Grab `TranslucentTB-1.0-portable-x64.zip` from the [Releases](../../releases) page, extract it anywhere and run `TranslucentTB.exe`.
 
-The setup speaks the same 12 languages as the app and follows your Windows display language. It installs TranslucentTB for your user account only, so it does not need administrator rights. It installs to `%LocalAppData%\Programs\TranslucentTB` and also installs the Windows components the app needs when they are missing: WinUI 2.8 and the Visual C++ runtime. TranslucentTB can be removed from *Settings → Apps → Installed apps*.
+The portable build has the same requirements as the upstream portable build:
 
-Requirements: Windows 11 on a 64-bit (x64) PC.
+- It only works on **Windows 11**.
+- It needs the *Microsoft.UI.Xaml 2.8* and *Microsoft.VCLibs 14 Desktop* frameworks. Most Windows 11 machines already have them; if the app reports missing dependencies, install them from Microsoft.
+
+To start it with Windows, put a shortcut to `TranslucentTB.exe` in `%AppData%\Microsoft\Windows\Start Menu\Programs\Startup`.
 
 ## Building from source
 
